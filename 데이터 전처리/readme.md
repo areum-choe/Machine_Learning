@@ -2,7 +2,7 @@
 
 - 연관분석 결과로 나온 item에 있는 코드와 본자료에 있는 저 코드가 해당하는 값을 찾아 매칭시켜주려고 한다.
 
-<img width="150" src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/12b84096-852c-4579-9ed1-2f7f52abd20c/Untitled.png">
+<img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/12b84096-852c-4579-9ed1-2f7f52abd20c/Untitled.png">
 
 ### 1. ITEM에 있는 ‘⇒’이 문자를 기준으로 split해서 나눠줌
 
