@@ -1,0 +1,32 @@
+{
+    "id": "12B5C820",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1626936236329.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "expression": "kc.rest",
+        "caption": "kc.rest",
+        "totalObservations": 404,
+        "displayedObservations": 404,
+        "variables": 18,
+        "cacheKey": "74263A12",
+        "object": "kc.rest",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=kc.rest&cache_key=74263A12&max_cols=50",
+        "preview": 0
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1626656405,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1626936236329,
+    "read_only": false,
+    "read_only_alternatives": []
+}

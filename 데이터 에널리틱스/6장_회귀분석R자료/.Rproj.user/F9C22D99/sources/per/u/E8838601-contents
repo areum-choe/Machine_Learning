@@ -1,0 +1,18 @@
+df = iris
+
+
+head(df)
+
+df3 <- df[order(df$Petal.Length), ]
+head(df3)
+
+
+dim(df4)
+dim(df[df %in% 4.4, ] )
+
+head(df[df %in% 4.4, ])
+
+
+df4 <- df[4.4 %in% df$Sepal.Length]
+head(df4)
+

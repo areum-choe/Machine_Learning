@@ -1,0 +1,246 @@
+########################### p35
+
+c(1,2,3,4,5)
+x <- c(1,2,3,4,5)
+x
+is.vector(x)
+is.factor(x)
+is.matrix(x)
+is.data.frame(x)
+is.list(x)
+y <- as.matrix(x)
+x
+y
+class(x)
+
+y <- c('한국', '의료', '패널'); is.vector(y)
+c('한국', '의료', 1)
+
+########################### p36
+x <- c(1,2,3,4,5)
+x+2
+x+3; x*3
+
+########################### p37
+x <- 1:7
+x
+length(x)
+
+y <- c('abc', 'defg')
+nchar(y)
+
+z <- 1:3; z
+names(z) <- c('aa', 'bb', 'cc'); z
+class(x)
+class(y)
+class(z)
+
+########################### p39
+x <- c(3,2,1,4); x
+x2 <- as.factor(x); x2
+
+y <- c('s', 't', 'q'); y
+y2 <- as.factor(y); y2
+
+z <- c('a', 'b', 'c', 'a', 'b', 'c', '2020'); z
+z2 <- as.factor(z); z2
+z3 <- factor(z, levels = c('c', 'b', 'a', '2020'), ordered = TRUE); z3
+
+########################### p41
+x <- matrix(1:8, nrow = 2); x
+y <- matrix(1:8, ncol = 2); y
+x[1,2]
+x[1,2] <- 30; x
+nrow(x)
+ncol(x)
+dim(x)
+dim(x)[2]
+
+x <- matrix(1:8, nrow = 2); x
+y <- matrix(1:8, nrow = 2); y[1,2] <- 30; y
+x+y
+x*y
+x==y; is.matrix(x==y); class(x==y)
+x>y
+
+colnames(x) <- c('2020', '2021', '2022', '2023'); x
+rownames(x) <- c('m', 'f'); x
+x[1,2]
+
+########################### p46
+letters
+LETTERS
+x <- 1:10; y <- 11:20; z <- letters[1:10]
+df <- data.frame(x, y, z); df; df[1,'x']
+df2 <- as.matrix(df); df2; df2[1,'x']
+
+names(df)
+colnames(df)
+rownames(df)
+names(df2)
+colnames(df2)
+rownames(df2)
+
+df
+colnames(df) <- c('v1', 'v2', 'v3'); df
+rownames(df) <- LETTERS[1:nrow(df)]; df
+
+df[,'v2']; df$v2; df[,2]; df[[2]]; df[2]
+df[1:5, c(1,3)]
+df[df$v1 < 7, c('v1', 'v3')]
+
+class(df); class(df$v1)
+df[1,1]
+df[1,1] <- "X"; df
+class(df$v1)
+
+df
+rownames(df) <- 1:nrow(df); df
+head(df)
+head(df, n=2)
+tail(df)
+View(tail(df, n=2))
+
+########################### p55
+x <- rep(LETTERS[1:2], times=500); x
+y <- rep(LETTERS[3:6], times=250); y
+z <- seq(from=0.5, to=500, by=0.5); z
+df <- data.frame(x, y, z); df
+df$x <- as.character(df$x); df
+table(df$x)
+table(df[[2]])
+table(df$x, df$y)
+summary(df)
+summary(df$z)
+
+########################### p57
+install.packages('foreign')
+library(foreign)
+t12ind <- read.dta('./t12ind.dta')
+
+library(pjjbach)
+library(readstata13)
+t12ind <- h2l(read.dta13("./t12ind.dta"))
+t12 <- t12ind
+head(t12)
+write.table(t12, './t12.csv', sep=',')
+
+t12csv <- read.table('./t12.csv', header=TRUE, sep=',')
+
+########################### p62
+install.packages('readxl')
+library(readxl)
+kh1 <- read_excel('khps_excel.xlsx', sheet='age'); kh1
+kh2 <- read_excel('khps_excel.xlsx', sheet=2); kh2
+
+
+########################### p69
+library(pjjbach)
+library(readstata13)
+t12ind <- h2l(read.dta13("./t12ind.dta"))
+t12 <- t12ind
+x <- t12[, c('pid', 'i_wsl', 'a9_4', 'c3')]; tmp
+
+class(x$pid); mode(x$pid)
+mode(x$c3)
+x$c3.2 <- as.integer(x$c3); x
+
+is.numeric(3); is.integer(3); is.double(3)
+is.numeric(3.0); is.integer(3.0); is.double(3.0)
+is.numeric(x$c3.2); is.integer(x$c3.2); is.double(x$c3.2)
+
+x$c3.3 <- as.factor(x$c3); x
+data.frame(table(x$a9_4))
+
+x$c3.4 <- as.character(x$c3); head(x)
+x$c3.5 <- as.logical(x$c3); head(x)
+table(x$c3)
+sum(table(x$c3))
+table(x$c3.5)
+
+x$c3[x$c3==2] <- 0; head(x)
+table(x$c3)
+x$c3.5 <- as.logical(x$c3); head(x)
+table(x$c3)
+sum(table(x$c3))
+
+########################### p73
+w <- c(1, NA, 3, 4); w
+x <- c(1, 2, sqrt(-3), 4); x
+y <- c(1, 2, 3, NULL); y
+
+
+########################### p75
+library(pjjbach)
+library(readstata13)
+t08 <- h2l(read.dta13("./data/t08ind.dta"))
+x <- t08[, c("pidwon", "c3", "c7")]; head(x)
+x$gender <- factor(x$c3, levels=c(1, 2), labels=c('m', 'f')); head(x)
+
+myLabels = c('혼인', '별거', '사별', '이혼', '미혼')
+x$marry = factor(x$c7, levels=1:5, labels=myLabels); head(x)
+data.frame(table(x$marry))
+
+table(x$c3, x$gender)
+table(x$c7, x$marry)
+
+########################### p77
+library(pjjbach)
+library(readstata13)
+t12 <- h2l(read.dta13("./data/t12hh.dta"))
+x <- t12[, c("b1", "tot_h", "tot_inc")]; head(x)
+x$total <- x$tot_h + x$tot_inc; head(x)
+x$eqinc <- x$total / sqrt(x$b1); head(x)
+x$eq3 <- round(x$eqinc, digit=3); head(x)
+
+########################### p79
+test <- c(1,2,2,1,2,1,1)
+ifelse(test < 2, 'y', 'n')
+
+library(pjjbach)
+library(readstata13)
+sv <- h2l(read.dta13("./data/survey.dta"))
+x <- sv[, c('year1', 'year2', 'year3')]; head(x)
+x$sy <- ifelse(is.na(x$year2) & is.na(x$year3), '1y', '2y'); head(x)
+t <- h2l(read.dta13('./data/t09appen.dta'))
+x <- t[, c('s27', 's28')]; head(x)
+table(x$s27, x$s28)
+
+mylabel1 <- c("모름/무응답", "1일", "2일", "3일", "4일", 
+              "5일", "6일", "7일", "전혀 하지 않음")
+mylabel2 <- c("모름/무응답", "해당사항 없음", 
+              "20분 미만", "20분 이상~30분 미만", "30분 이상~40분 미만", 
+              "40분 이상~50분 미만", "50분 이상~60분 미만", "60분 이상")
+
+x$s27f <- factor(x$s27, levels=c(-9, 1:8), labels=mylabel1); head(x)
+x$s28f <- factor(x$s28, levels=c(-9, -1, 1:6), labels=mylabel2); head(x)
+result = table(x$s27f, x$s28f); result
+write.csv(result, './result.csv')
+
+x$hard <- ifelse(x$s27==8 | x$s27<0 | x$s28<0, 1,
+          ifelse(x$s27==1, 2,
+          ifelse(x$s27==2 & x$s28<6, 2,
+          ifelse(x$s27==3 & x$s28<5, 2,
+          ifelse(x$s27==4 & x$s28<4, 2,
+          ifelse(x$s27==5 & x$s28<3, 2,
+          ifelse(x$s27==6 & x$s28<2, 2,
+          3)))))))
+mylabel3 <- c("미실천", "실천 수준 낮음", "실천 수준 높음")
+x$hardf <- factor(x$hard, levels=1:3, labels=mylabel3); head(x)
+table(x$s27, x$s28, x$hardf)
+
+
+########################### p85
+library(pjjbach)
+library(readstata13)
+
+t08ou <- h2l(read.dta13("./data/t08ou.dta"))
+x <- t08ou[t08ou$ou3==-9 | t08ou$ou8==-9, c("ou3", "ou6", "ou7", "ou8")]; head(x)   
+x <- x[order(x$ou3, x$ou8),]; head(x)
+head(x==-9)
+x[x==-9] <- NA; head(x)
+
+table(is.na(x$ou3))
+table(x$ou3 == -9)      
+x$ou3[is.na(x$ou3)] <- -9
+table(x$ou3 == -9) 

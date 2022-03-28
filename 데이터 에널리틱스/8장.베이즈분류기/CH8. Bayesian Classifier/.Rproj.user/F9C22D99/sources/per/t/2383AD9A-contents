@@ -1,0 +1,239 @@
+####################################################
+## Data Preprocessing for numeric
+####################################################
+sb <- read.table('./spambase.data', sep=',', header=FALSE); dim(sb)
+
+colnames(sb) <-
+c(
+'Wmake',
+'Waddress',
+'Wall',
+'W3d',
+'Wour',
+'Wover',
+'Wremove',
+'Winternet',
+'Worder',
+'Wmail',
+'Wreceive',
+'Wwill',
+'Wpeople',
+'Wreport',
+'Waddresses',
+'Wfree',
+'Wbusiness',
+'Wemail',
+'Wyou',
+'Wcredit',
+'Wyour',
+'Wfont',
+'W000',
+'Wmoney',
+'Whp',
+'Whpl',
+'Wgeorge',
+'W650',
+'Wlab',
+'Wlabs',
+'Wtelnet',
+'W857',
+'Wdata',
+'W415',
+'W85',
+'Wtechnology',
+'W1999',
+'Wparts',
+'Wpm',
+'Wdirect',
+'Wcs',
+'Wmeeting',
+'Woriginal',
+'Wproject',
+'Wre',
+'Wedu',
+'Wtable',
+'Wconference',
+'C49',
+'C50',
+'C51',
+'C52',
+'C53',
+'C54',
+'Acap',
+'Lcap',
+'Tcap',
+'Spam'
+); head(sb); table(is.na(sb))
+
+sb$Spam <- factor(sb$Spam, levels=c(0,1), labels=c(0,1))
+
+sb$idx <- 1:nrow(sb); head(sb)
+
+####################################################
+## Data Splitting
+####################################################
+# install.packages('splitstackshape')
+library(splitstackshape)
+
+pSeed <- 12345
+set.seed(pSeed)
+
+sb.tra <- stratified(sb, 'Spam', 0.6)
+sb.rest <- sb[! sb$idx %in% sb.tra$idx,]
+
+sb.val <- stratified(sb.rest, 'Spam', 0.5)
+sb.tes <- sb.rest[! sb.rest$idx %in% sb.val$idx,]
+
+sb.tra <- subset(sb.tra, select=-c(idx)); head(sb.tra)
+sb.val <- subset(sb.val, select=-c(idx)); head(sb.val)
+sb.tes <- subset(sb.tes, select=-c(idx)); head(sb.tes)
+
+## ONLY TEST for STRATIFIED SAMPLING
+t <- table(sb.tra$Spam); t; t[2]/(t[1]+t[2]) 
+t <- table(sb.val$Spam); t; t[2]/(t[1]+t[2]) 
+t <- table(sb.tes$Spam); t; t[2]/(t[1]+t[2]) 
+## ONLY TEST for STRATIFIED SAMPLING
+
+####################################################
+## Bayesian Classifier
+####################################################
+# install.packages('caret')
+# install.packages('e1071')
+library(caret)
+library(e1071)
+bayesModel <- naiveBayes(x=sb.tra, y=sb.tra$Spam)
+summary(bayesModel)
+
+Predict.tra <- predict(bayesModel, sb.tra)
+cTab.tra <- table(Actual=sb.tra$Spam, Predict.tra); cTab.tra
+cM.tra <- confusionMatrix(t(cTab.tra), positive='1'); cM.tra
+Accu.tra <- cM.tra$overall['Accuracy']
+cTab.tra; Accu.tra
+
+Predict.val <- predict(bayesModel, sb.val)
+cTab.val <- table(Actual=sb.val$Spam, Predict.val); cTab.val
+cM.val <- confusionMatrix(t(cTab.val), positive='1'); cM.val
+Accu.val <- cM.val$overall['Accuracy']
+cTab.val; Accu.val
+
+
+
+
+####################################################
+## Data Preprocessing for factor
+####################################################
+sb <- read.table('./spambase.data', sep=',', header=FALSE); dim(sb)
+
+colnames(sb) <-
+  c(
+    'Wmake',
+    'Waddress',
+    'Wall',
+    'W3d',
+    'Wour',
+    'Wover',
+    'Wremove',
+    'Winternet',
+    'Worder',
+    'Wmail',
+    'Wreceive',
+    'Wwill',
+    'Wpeople',
+    'Wreport',
+    'Waddresses',
+    'Wfree',
+    'Wbusiness',
+    'Wemail',
+    'Wyou',
+    'Wcredit',
+    'Wyour',
+    'Wfont',
+    'W000',
+    'Wmoney',
+    'Whp',
+    'Whpl',
+    'Wgeorge',
+    'W650',
+    'Wlab',
+    'Wlabs',
+    'Wtelnet',
+    'W857',
+    'Wdata',
+    'W415',
+    'W85',
+    'Wtechnology',
+    'W1999',
+    'Wparts',
+    'Wpm',
+    'Wdirect',
+    'Wcs',
+    'Wmeeting',
+    'Woriginal',
+    'Wproject',
+    'Wre',
+    'Wedu',
+    'Wtable',
+    'Wconference',
+    'C49',
+    'C50',
+    'C51',
+    'C52',
+    'C53',
+    'C54',
+    'Acap',
+    'Lcap',
+    'Tcap',
+    'Spam'
+  ); head(sb); table(is.na(sb))
+
+sb <- ifelse(sb==0, 'n', 'y'); head(sb)
+sb <- as.data.frame(sb)
+#sb <- factor(sb, levels=c(0,1), labels=c('n','y'))
+
+sb$idx <- 1:nrow(sb); head(sb)
+
+####################################################
+## Data Splitting
+####################################################
+# install.packages('splitstackshape')
+library(splitstackshape)
+
+pSeed <- 12345
+set.seed(pSeed)
+
+sb.tra <- stratified(sb, 'Spam', 0.6)
+sb.rest <- sb[! sb$idx %in% sb.tra$idx,]
+
+sb.val <- stratified(sb.rest, 'Spam', 0.5)
+sb.tes <- sb.rest[! sb.rest$idx %in% sb.val$idx,]
+
+sb.tra <- subset(sb.tra, select=-c(idx)); head(sb.tra)
+sb.val <- subset(sb.val, select=-c(idx)); head(sb.val)
+sb.tes <- subset(sb.tes, select=-c(idx)); head(sb.tes)
+
+## ONLY TEST for STRATIFIED SAMPLING
+t <- table(sb.tra$Spam); t; t[2]/(t[1]+t[2]) 
+t <- table(sb.val$Spam); t; t[2]/(t[1]+t[2]) 
+t <- table(sb.tes$Spam); t; t[2]/(t[1]+t[2]) 
+## ONLY TEST for STRATIFIED SAMPLING
+
+####################################################
+## Bayesian Classifier
+####################################################
+# library(caret)
+# library(e1071)
+bayesModel <- naiveBayes(x=sb.tra, y=sb.tra$Spam)
+summary(bayesModel)
+
+Predict.tra <- predict(bayesModel, sb.tra)
+cTab.tra <- table(Actual=sb.tra$Spam, Predict.tra); cTab.tra
+cM.tra <- confusionMatrix(t(cTab.tra), positive='y'); cM.tra
+Accu.tra <- cM.tra$overall['Accuracy']
+cTab.tra; Accu.tra
+
+Predict.val <- predict(bayesModel, sb.val)
+cTab.val <- table(Actual=sb.val$Spam, Predict.val); cTab.val
+cM.val <- confusionMatrix(t(cTab.val), positive='y'); cM.val
+Accu.val <- cM.val$overall['Accuracy']
+cTab.val; Accu.val
+

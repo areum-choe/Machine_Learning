@@ -1,0 +1,25 @@
+{
+    "id": "0A3A4891",
+    "path": null,
+    "project_path": null,
+    "type": "object_explorer",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1628742033746.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "id": "2c723d4099f64e219b15ebf3e053364b",
+        "name": "kmResult",
+        "title": "kmResult"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 7020599942337553772,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1628742033746,
+    "read_only": false,
+    "read_only_alternatives": []
+}

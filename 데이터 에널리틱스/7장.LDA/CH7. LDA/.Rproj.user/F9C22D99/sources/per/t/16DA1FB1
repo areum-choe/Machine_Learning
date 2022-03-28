@@ -1,0 +1,32 @@
+{
+    "id": "16DA1FB1",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1627273426849.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "expression": "loan",
+        "caption": "loan",
+        "totalObservations": "614",
+        "displayedObservations": "614",
+        "variables": "13",
+        "cacheKey": "78CF2B01",
+        "object": "loan",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=loan&cache_key=78CF2B01&max_cols=50",
+        "preview": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1626919345,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1627273426849,
+    "read_only": false,
+    "read_only_alternatives": []
+}
